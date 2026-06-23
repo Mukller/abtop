@@ -43,7 +43,3 @@ python -m abtop
 - **GitHub Copilot** (читает VSCode extension logs)
 - **Aider** (парсит `aider.log`)
 - **Continue** (читает `.continue/logs/`)
-
-## Источник вдохновения
-
-[abtop](https://github.com/opencodepath/abtop) из HelloGitHub #121
