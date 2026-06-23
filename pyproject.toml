@@ -1,0 +1,9 @@
+[project]
+name = "abtop"
+version = "0.1.0"
+description = "htop для AI-агентов"
+requires-python = ">=3.10"
+dependencies = ["psutil>=5.9"]
+
+[project.scripts]
+abtop = "abtop.__main__:main"
