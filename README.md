@@ -1,3 +1,5 @@
+[English](README_EN.md)
+
 # abtop
 
 `htop` для AI-агентов. Смотришь что делает Claude Code, Cursor, Copilot
