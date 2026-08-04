@@ -8,7 +8,6 @@ abtop — мониторинг AI-агентов в терминале.
 from __future__ import annotations
 
 import argparse
-import curses
 import glob
 import json
 import os
@@ -255,6 +254,9 @@ def draw(stdscr, agents: list[AgentInfo]) -> None:
 
 
 def run_tui(interval: float) -> None:
+    global curses
+    import curses
+
     def _main(stdscr) -> None:
         stdscr.timeout(int(interval * 1000))
         agents = collect()
@@ -283,6 +285,11 @@ def run_tui(interval: float) -> None:
 # ──────────────────────────────────────────────
 
 def main() -> None:
+    # Windows-консоли часто используют cp1251/cp866 вместо UTF-8 — без этого
+    # print() падает на любом non-ASCII символе (стрелки, тире, значки).
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(description="Мониторинг AI-агентов")
     parser.add_argument("--interval", type=float, default=3.0,
                         help="секунд между обновлениями")
@@ -303,7 +310,13 @@ def main() -> None:
                   f"{fmt_tokens(ag.total_tokens):9} {fmt_cost(ag.cost_usd):10}")
         return
 
-    run_tui(args.interval)
+    try:
+        run_tui(args.interval)
+    except ModuleNotFoundError:
+        print("Интерактивный режим требует curses.")
+        print("На Windows: pip install windows-curses")
+        print("Или используйте --once для разового вывода без TUI.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

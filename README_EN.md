@@ -15,28 +15,32 @@
 
 `htop` for AI agents. See what Claude Code, Cursor, Copilot and other coding agents are doing right now: files, tokens, cost, time.
 
+Real output of `abtop --once`, captured while writing this very README
+(agent = this Claude Code session itself):
+
 ```
-╔══════════════════════════════════════════════════════╗
-║ abtop v0.1  —  AI Agent Monitor          23.06.2026 ║
-╠═══════════╦═══════════╦════════╦═══════╦════════════╣
-║ Agent     ║ Status    ║ Files  ║ Tokens║ Cost       ║
-╠═══════════╬═══════════╬════════╬═══════╬════════════╣
-║ claude    ║ ● active  ║   14   ║  42k  ║  $0.63     ║
-║ cursor    ║ ● active  ║    3   ║  12k  ║  $0.08     ║
-║ copilot   ║ ○ idle    ║    0   ║   —   ║  —         ║
-╚═══════════╩═══════════╩════════╩═══════╩════════════╝
-[q] quit  [r] reset  [s] sort
+$ abtop --once
+Agent        PID     Status     Tokens    Cost      
+───────────────────────────────────────────────────────
+claude       7908    active     —         —         
 ```
+
+The full TUI mode (`abtop` without `--once`) refreshes live and looks like a
+classic `htop`, just for AI agents instead of OS processes.
 
 ## Run
 
 ```bash
 pip install abtop
-abtop
+abtop            # interactive TUI (refreshes every --interval)
+abtop --once     # one-shot output, no TUI — works without curses
 
 # from source
 python -m abtop
 ```
+
+On Windows, the interactive TUI requires `pip install windows-curses`
+(stdlib `curses` only ships on Linux/macOS) — `--once` works without it.
 
 ## What it tracks
 
