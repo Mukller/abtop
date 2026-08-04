@@ -6,6 +6,13 @@
 
 # abtop
 
+<p align="center">
+  <a href="https://github.com/Mukller">
+    <img src="https://img.shields.io/badge/Anton%20Petnitsky-Developer-0d1117?style=for-the-badge&logo=github&logoColor=white&labelColor=0d1117&color=58a6ff" alt="Anton Petnitsky" />
+  </a>
+</p>
+
+
 `htop` for AI agents. See what Claude Code, Cursor, Copilot and other coding agents are doing right now: files, tokens, cost, time.
 
 ```
